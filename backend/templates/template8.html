@@ -1,0 +1,38 @@
+<!-- TEMPLATE 8: Product Management - Mid Level -->
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body { font-family: 'Tahoma', sans-serif; }
+        .portfolio-link { color: #8e44ad; border-bottom: 2px solid; }
+        .metric-bubble { background: #f0e6f5; border-radius: 15px; padding: 15px; }
+        .gantt-example { background: #f8f9fa; padding: 20px; }
+    </style>
+</head>
+<body>
+    <div style="max-width: 900px; margin: 0 auto; padding: 30px;">
+        <header style="text-align: center;">
+            <h1>{{name}}</h1>
+            <h2 style="color: #8e44ad">{{title}}</h2>
+            <div>{{contactInfo.linkedin}} | Portfolio: <span class="portfolio-link">example.com/portfolio</span></div>
+        </header>
+
+        <div style="margin:40px 0">
+            <h2>PRODUCT METRICS</h2>
+            <div class="metric-bubble">
+                {% for project in projects %}
+                <p><strong>{{project.name}}:</strong> {{project.description}}</p>
+                {% endfor %}
+            </div>
+        </div>
+
+        <h2>CAREER PROGRESSION</h2>
+        {% for exp in workExperience %}
+        <div class="gantt-example">
+            <h3>{{exp.title}} | {{exp.company}}</h3>
+            <p>{{exp.dates}} | {{exp.description}}</p>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

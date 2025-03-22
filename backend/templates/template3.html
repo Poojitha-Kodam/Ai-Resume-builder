@@ -1,0 +1,49 @@
+<!-- TEMPLATE 3: Software Engineering - Senior Level -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{{name}} - Principal Engineer</title>
+    <style>
+        body { font-family: 'Lato', sans-serif; line-height: 1.7; }
+        .header { background: #2c3e50; color: white; padding: 40px; }
+        .leadership-section { background: #f8f9fa; padding: 25px; margin: 20px 0; }
+        .timeline { border-left: 3px solid #3498db; padding-left: 25px; }
+        .metric { font-size: 1.2em; color: #e74c3c; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>{{name}}</h1>
+        <h2>{{title}}</h2>
+        <div style="margin-top:15px">
+            {{contactInfo.email}} | {{contactInfo.phone}} | {{contactInfo.linkedin}}
+        </div>
+    </div>
+
+    <div style="padding: 40px;">
+        <div class="leadership-section">
+            <h2>LEADERSHIP & IMPACT</h2>
+            {% for exp in workExperience %}
+            <div class="timeline" style="margin-bottom:30px">
+                <h3>{{exp.title}} - {{exp.company}}</h3>
+                <p class="metric">{{exp.dates}}</p>
+                <p>{{exp.description}}</p>
+            </div>
+            {% endfor %}
+        </div>
+
+        <h2>TECHNICAL ARCHITECTURE</h2>
+        <div class="two-column">
+            <div>
+                <h3>Key Skills</h3>
+                <ul>{% for skill in skills %}<li>{{skill}}</li>{% endfor %}</ul>
+            </div>
+            <div>
+                <h3>Certifications</h3>
+                <ul>{% for cert in certifications %}<li>{{cert}}</li>{% endfor %}</ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

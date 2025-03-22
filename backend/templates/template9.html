@@ -1,0 +1,29 @@
+<!-- TEMPLATE 9: Product Management - Senior Level -->
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body { font-family: 'Georgia', serif; }
+        .executive-header { background: #2c3e50; color: white; padding: 50px; }
+        .strategy-section { border-left: 4px solid #9b59b6; padding-left: 25px; }
+        .board-ready { background: #e8eaf6; padding: 25px; }
+    </style>
+</head>
+<body>
+    <div class="executive-header">
+        <h1>{{name}}</h1>
+        <h2>Director of Product Management</h2>
+        <div>{{contactInfo.email}} | {{contactInfo.phone}} | {{contactInfo.linkedin}}</div>
+    </div>
+
+    <div style="padding:50px">
+        <div class="board-ready">
+            <h2>EXECUTIVE SUMMARY</h2>
+            <p>{{summary}}</p>
+        </div>
+
+        <h2>STRATEGIC LEADERSHIP</h2>
+        {% for exp in workExperience %}
+        <div class="strategy-section">
+            <h3>{{exp.title}} - {{exp.company}}</h3>
+            <p><strong>{{exp.dates}}</strong> | {{exp

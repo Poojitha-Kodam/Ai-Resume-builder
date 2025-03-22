@@ -1,0 +1,50 @@
+<!-- TEMPLATE 2: Software Engineering - Mid Level -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{{name}} - Senior Software Engineer</title>
+    <style>
+        :root { --primary: #34495e; --accent: #e74c3c; }
+        body { font-family: 'Helvetica Neue', sans-serif; max-width: 800px; margin: 0 auto; }
+        .header { text-align: center; padding: 30px 0; }
+        .badge { background: var(--accent); color: white; padding: 8px 15px; border-radius: 20px; }
+        .two-column { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+        .experience-item { margin-bottom: 25px; }
+        .certifications { display: flex; flex-wrap: wrap; gap: 10px; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>{{name}}</h1>
+        <div class="badge">{{experience}} Developer</div>
+        <div style="margin-top:15px">{{contactInfo.email}} | {{contactInfo.phone}} | {{contactInfo.github}}</div>
+    </div>
+
+    <div class="two-column">
+        <div>
+            <h2>CORE COMPETENCIES</h2>
+            <ul>{% for skill in skills %}<li>{{skill}}</li>{% endfor %}</ul>
+            
+            <h2>EDUCATION</h2>
+            {% for edu in education %}
+            <div>
+                <h3>{{edu.degree}}</h3>
+                <p>{{edu.school}} | {{edu.dates}}</p>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div>
+            <h2>PROFESSIONAL EXPERIENCE</h2>
+            {% for exp in workExperience %}
+            <div class="experience-item">
+                <h3>{{exp.title}}</h3>
+                <p><strong>{{exp.company}}</strong> | {{exp.dates}}</p>
+                <p>{{exp.description}}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>

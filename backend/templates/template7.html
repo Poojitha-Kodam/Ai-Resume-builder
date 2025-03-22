@@ -1,0 +1,35 @@
+<!-- TEMPLATE 7: Product Management - Entry Level -->
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        :root { --pm-color: #9b59b6; }
+        body { font-family: 'Verdana', sans-serif; }
+        .pm-header { background: var(--pm-color); color: white; padding: 40px; }
+        .roadmap-example { border: 2px solid var(--pm-color); padding: 20px; }
+        .stakeholder-skills { column-count: 2; }
+    </style>
+</head>
+<body>
+    <div class="pm-header">
+        <h1>{{name}}</h1>
+        <h2>{{title}}</h2>
+        <div>{{contactInfo.email}} | {{contactInfo.linkedin}}</div>
+    </div>
+
+    <div style="padding:30px">
+        <h2>CORE COMPETENCIES</h2>
+        <div class="stakeholder-skills">
+            <ul>{% for skill in skills %}<li>{{skill}}</li>{% endfor %}</ul>
+        </div>
+
+        <h2>PRODUCT INITIATIVES</h2>
+        {% for exp in workExperience %}
+        <div class="roadmap-example">
+            <h3>{{exp.title}} - {{exp.company}}</h3>
+            <p>{{exp.description}}</p>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

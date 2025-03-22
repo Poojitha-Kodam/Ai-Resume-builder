@@ -1,0 +1,37 @@
+<!-- TEMPLATE 4: Data Science - Entry Level -->
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        :root { --ds-color: #27ae60; }
+        body { font-family: 'Open Sans', sans-serif; }
+        .ds-header { background: linear-gradient(45deg, #2ecc71, #27ae60); color: white; padding: 40px; }
+        .toolkit { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
+        .modeling-section { background: #e8f6f3; padding: 20px; }
+    </style>
+</head>
+<body>
+    <div class="ds-header">
+        <h1>{{name}}</h1>
+        <h2>{{title}}</h2>
+        <div class="contact-info">
+            {{contactInfo.email}} | {{contactInfo.linkedin}} | {{contactInfo.github}}
+        </div>
+    </div>
+
+    <div style="padding:30px">
+        <h2>DATA SCIENCE TOOLKIT</h2>
+        <div class="toolkit">
+            {% for skill in skills %}<div class="skill-tag">{{skill}}</div>{% endfor %}
+        </div>
+
+        <h2>PROJECTS</h2>
+        {% for project in projects %}
+        <div class="modeling-section">
+            <h3>{{project.name}}</h3>
+            <p>{{project.description}}</p>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

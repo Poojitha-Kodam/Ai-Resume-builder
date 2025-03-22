@@ -1,0 +1,367 @@
+/* General Styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f8f8f8;
+  color: #333;
+}
+
+.chatbot-container {
+  max-width: 1000px;
+  margin: 20px auto;
+  background-color: white;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+/* Chat Messages */
+.chat-messages {
+  max-height: 400px;
+  overflow-y: auto;
+  padding: 10px;
+  background-color: #f1f1f1;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.message {
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 8px;
+}
+
+.message.user {
+  background-color: #007bff;
+  color: white;
+  text-align: right;
+}
+
+.message.bot {
+  background-color: #e0e0e0;
+  color: #333;
+  text-align: left;
+}
+
+/* Template Selection */
+.template-scroll {
+  display: flex;
+  overflow-x: auto;
+  padding: 10px 0;
+  gap: 15px;
+  white-space: nowrap;
+  margin-bottom: 20px;
+}
+
+.template-item {
+  flex: 0 0 auto;
+  width: 180px;
+  border: 2px solid #ddd;
+  padding: 10px;
+  border-radius: 10px;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.template-item:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+}
+
+.template-image {
+  width: 100%;
+  height: 150px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+/* Form Styling */
+.details-form {
+  padding: 20px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.details-form h3 {
+  color: #007bff;
+  margin-bottom: 10px;
+}
+
+.details-form label {
+  display: block;
+  margin: 10px 0 5px;
+  font-weight: bold;
+}
+
+.details-form input,
+.details-form textarea {
+  width: 100%;
+  padding: 10px;
+  color: black;
+
+  margin: 5px 0 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 14px;
+  background-color: #f9f9f9;
+}
+
+.details-form textarea {
+  color: black;
+  height: 100px;
+  resize: vertical;
+}
+
+.form-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.form-button:hover {
+  background-color: #0056b3;
+}
+
+/* Download Section */
+.download-section {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.download-button {
+  background-color: #28a745;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  display: inline-block;
+  transition: background-color 0.3s;
+}
+
+.download-button:hover {
+  background-color: #218838;
+}
+
+/* Chat Input */
+.chat-input {
+  display: flex;
+  margin-top: 10px;
+}
+
+.input-field {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+.send-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.send-button:hover {
+  background-color: #0056b3;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .chatbot-container {
+    width: 90%;
+    padding: 15px;
+  }
+
+  .template-item {
+    width: 140px;
+  }
+
+  .input-field {
+    padding: 8px;
+  }
+
+  .send-button {
+    padding: 8px 15px;
+  }
+}
+
+/* form details
+.details {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  max-height: 300px;
+}
+
+.details *div {
+  margin: 10px;
+}
+.details input{
+  height: 20px;
+  width: 150px;
+  padding: 6px;
+  border-radius: 6px;
+  margin-left: 50px;
+  margin-bottom: 5px;
+}
+.details textarea {
+  height: 50px;
+  width: 150px;
+  padding: 6px;
+  border-radius: 6px;
+  margin-left: 50px;
+
+}
+.details::-webkit-scrollbar {
+  display: none;
+}
+.details .form-button {
+  width: 100px;
+} */
+.suggestion {
+  color: #007bff;
+  font-style: italic;
+  margin-top: 5px;
+  font-size: 14px;
+}
+
+.scrollable-list {
+  margin-bottom: 20px;
+}
+
+.scrollable-items {
+  display: flex;
+  overflow-x: auto;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.scrollable-item {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.scrollable-item.selected {
+  border-color: #007bff;
+  background-color: #f0f8ff;
+}
+
+.template-scroll {
+  display: flex;
+  overflow-x: auto;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.template-item {
+  flex: 0 0 auto;
+  width: 180px;
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 10px;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.template-item:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+}
+
+.template-image {
+  width: 100%;
+  height: 150px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+/* App.css */
+.template-image {
+  width: 150px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+}
+
+.selected-template {
+  border: 2px solid #007bff !important;
+  box-shadow: 0 0 10px rgba(0, 123, 255, 0.3);
+}
+/* Template styling */
+.template-scroll {
+  display: flex;
+  overflow-x: auto;
+  gap: 15px;
+  padding: 10px 0;
+}
+
+.template-item {
+  flex: 0 0 auto;
+  width: 180px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.template-item:hover {
+  transform: scale(1.05);
+}
+
+.template-image {
+  width: 100%;
+  height: 200px;
+  border-radius: 8px;
+  object-fit: cover;
+  border: 1px solid #ddd;
+}
+
+.template-image.selected {
+  border: 2px solid #007bff;
+  box-shadow: 0 0 10px rgba(0, 123, 255, 0.3);
+}
+
+.no-templates-message {
+  text-align: center;
+  color: #666;
+  padding: 20px;
+}
+
+/* Add these to App.css */
+.selected-template {
+  border: 2px solid #007bff !important;
+  box-shadow: 0 0 10px rgba(0, 123, 255, 0.2);
+}
+
+.image-error {
+  opacity: 0.5;
+  background: #f0f0f0;
+}
+
+.template-name {
+  margin-top: 8px;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.no-templates-message {
+  padding: 20px;
+  color: #666;
+  text-align: center;
+}

@@ -1,0 +1,83 @@
+<!-- TEMPLATE 1: Software Engineering - Entry Level -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>{{name}} - Software Engineer</title>
+    <style>
+      :root {
+        --primary: #2c3e50;
+        --secondary: #3498db;
+      }
+      body {
+        font-family: "Segoe UI", sans-serif;
+        line-height: 1.6;
+        margin: 0 40px;
+      }
+      .header {
+        text-align: center;
+        padding: 25px 0;
+        border-bottom: 3px solid var(--primary);
+      }
+      .section {
+        margin: 25px 0;
+      }
+      h2 {
+        color: var(--primary);
+        border-bottom: 2px solid #ecf0f1;
+        padding-bottom: 6px;
+      }
+      .skills {
+        column-count: 2;
+        margin: 15px 0;
+      }
+      .experience-item {
+        margin-bottom: 20px;
+      }
+      .contact-info {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        flex-wrap: wrap;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <h1 style="margin: 5px 0">{{name}}</h1>
+      <div class="contact-info">
+        <span>{{contactInfo.phone}}</span>
+        <span>{{contactInfo.email}}</span>
+        <span>{{contactInfo.linkedin}}</span>
+        <span>{{contactInfo.github}}</span>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>SUMMARY</h2>
+      <p>{{summary}}</p>
+    </div>
+
+    <div class="section">
+      <h2>TECHNICAL SKILLS</h2>
+      <div class="skills">
+        <ul>
+          {% for skill in skills %}
+          <li>{{skill}}</li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>EXPERIENCE</h2>
+      {% for exp in workExperience %}
+      <div class="experience-item">
+        <h3 style="margin-bottom: 3px">{{exp.title}} | {{exp.company}}</h3>
+        <p style="color: var(--secondary); margin: 2px 0">{{exp.dates}}</p>
+        <p>{{exp.description}}</p>
+      </div>
+      {% endfor %}
+    </div>
+  </body>
+</html>

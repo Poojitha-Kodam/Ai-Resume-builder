@@ -1,0 +1,40 @@
+<!-- TEMPLATE 5: Data Science - Mid Level -->
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body { font-family: 'Roboto', sans-serif; }
+        .metric-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+        .publication { border-left: 3px solid #2980b9; padding-left: 15px; }
+        .viz-example { background: #f0f8ff; padding: 15px; }
+    </style>
+</head>
+<body>
+    <div style="max-width: 1000px; margin: 0 auto;">
+        <header style="text-align: center; padding: 40px 0;">
+            <h1>{{name}}</h1>
+            <h2 style="color: #2980b9">{{title}}</h2>
+            <div>{{contactInfo.email}} | {{contactInfo.linkedin}} | {{contactInfo.github}}</div>
+        </header>
+
+        <div class="metric-grid">
+            <div>
+                <h3>Key Skills</h3>
+                <ul>{% for skill in skills %}<li>{{skill}}</li>{% endfor %}</ul>
+            </div>
+            <div class="viz-example">
+                <h3>Visualization Expertise</h3>
+                <p>{% for project in projects %}{{project.name}}{% if not loop.last %} • {% endif %}{% endfor %}</p>
+            </div>
+        </div>
+
+        <h2>PROFESSIONAL CONTRIBUTIONS</h2>
+        {% for exp in workExperience %}
+        <div class="publication">
+            <h3>{{exp.title}} - {{exp.company}}</h3>
+            <p>{{exp.description}}</p>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

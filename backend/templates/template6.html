@@ -1,0 +1,42 @@
+<!-- TEMPLATE 6: Data Science - Senior Level -->
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body { font-family: 'Arial', sans-serif; }
+        .executive-summary { background: #34495e; color: white; padding: 40px; }
+        .leadership-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 30px; }
+        .impact-metric { font-size: 1.3em; color: #2ecc71; }
+    </style>
+</head>
+<body>
+    <div class="executive-summary">
+        <h1>{{name}}</h1>
+        <h2>Lead Data Scientist</h2>
+        <p>{{summary}}</p>
+    </div>
+
+    <div style="padding:40px">
+        <div class="leadership-grid">
+            <div>
+                <h2>CAREER HIGHLIGHTS</h2>
+                {% for exp in workExperience %}
+                <div style="margin-bottom:30px">
+                    <h3>{{exp.title}} - {{exp.company}}</h3>
+                    <p class="impact-metric">{{exp.dates}}</p>
+                    <p>{{exp.description}}</p>
+                </div>
+                {% endfor %}
+            </div>
+            
+            <div>
+                <h2>ADVANCED SKILLSET</h2>
+                <ul>{% for skill in skills %}<li>{{skill}}</li>{% endfor %}</ul>
+                
+                <h2>PUBLICATIONS</h2>
+                <ul>{% for cert in certifications %}<li>{{cert}}</li>{% endfor %}</ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
