@@ -164,7 +164,8 @@ const handleFormSubmit = async (e) => {
     );
 
     const atsResult = await atsResponse.json();
-    setAtsScore(atsResult.ats_score);
+    console.log("ATS Response:", atsResult);
+    setAtsScore(atsResult);
   } catch (error) {
     alert("⚠️ Error submitting form: " + error);
     console.error(error);

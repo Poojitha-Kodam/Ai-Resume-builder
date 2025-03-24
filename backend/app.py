@@ -65,19 +65,22 @@ def clean_output_folder():
 def get_templates():
     try:
         data = request.json
-        domain = data.get("domain")
-        experience = data.get("experience")
-        print(f"Received request for domain: {domain}, experience: {experience}")
+        domain = data.get("domain", "").strip().lower()
+        experience = data.get("experience", "").strip().lower()
         
+        print(f"Searching templates for: {domain} - {experience}")
+
         matched_templates = [
             t for t in templates
-            if t["domain"].lower() == domain.lower() and t["experience"].lower() == experience.lower()
+            if t["domain"].strip().lower() == domain
+            and t["experience"].strip().lower() == experience
         ]
-        print(f"Matched templates: {matched_templates}")
+        
+        print(f"Found {len(matched_templates)} templates")
         return jsonify({"templates": matched_templates})
     except Exception as e:
-        print(f"❌ Error fetching templates: {e}")
-        return jsonify({"message": "Failed to fetch templates", "error": str(e)}), 500
+        print(f"Template error: {str(e)}")
+        return jsonify({"error": str(e)}), 500
 
 @app.route("/generate-resume", methods=["POST"])
 def generate_resume():
@@ -141,13 +144,20 @@ def generate_resume():
     except Exception as e:
         print(f"❌ Error generating resume: {e}")
         return jsonify({"message": "Failed to generate resume", "error": str(e)}), 500
-@app.route("/calculate-ats-score", methods=["POST"])
+@app.route('/calculate-ats-score', methods=['POST'])
 def calculate_ats_score():
     try:
-        data = request.json
-        result = ATSScanner.calculate_score(data)
-        return jsonify(result)
+        resume_data = request.json
+        print("Received Data:", resume_data)  # Debugging
+
+        # Ensure the function exists in ats_scoring.py
+        ats_result = ATSScanner().calculate_score(resume_data)  
+        
+        print("ATS Result:", ats_result)  # Debugging
+        return jsonify(ats_result)
+
     except Exception as e:
+        print("Error:", str(e))
         return jsonify({"error": str(e)}), 500
 
 @app.route("/download-resume/<filename>", methods=["GET"])

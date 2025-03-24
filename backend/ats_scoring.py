@@ -37,49 +37,51 @@ class ATSScanner:
         'teh', 'adn', 'recieve', 'experiance', 
         'acheive', 'skils', 'responsiblities'
     ]
-
+    
     @classmethod
     def calculate_score(cls, resume_data: Dict) -> Dict[str, Union[int, List[str], Dict]]:
-        """
-        Calculate ATS score with detailed feedback
-        Args:
-            resume_data: Dictionary containing resume sections
-        Returns:
-            Dictionary with score, feedback, and keyword analysis
-        """
         try:
             score = 0
             feedback = []
             domain = resume_data.get('domain', '').lower()
-            
+
             # 1. Keyword Analysis (40 points max)
             keyword_score, kw_feedback = cls._analyze_keywords(resume_data, domain)
             score += keyword_score
             feedback.extend(kw_feedback)
-            
+
             # 2. Resume Completeness (30 points)
             completeness_score, comp_feedback = cls._check_completeness(resume_data)
             score += completeness_score
             feedback.extend(comp_feedback)
-            
+
             # 3. Content Quality (20 points)
             quality_score, quality_feedback = cls._check_content_quality(resume_data)
             score += quality_score
             feedback.extend(quality_feedback)
-            
+
             # 4. Red Flags (0-10 points deduction)
             red_flags, red_feedback = cls._detect_red_flags(resume_data)
             score = max(0, score - red_flags)
             feedback.extend(red_feedback)
-            
+
+            # New: Calculate matched keywords based on domain-specific keywords
+            import re
+            from collections import Counter
+            content = cls._get_content_string(resume_data)
+            word_freq = Counter(re.findall(r'\w+', content.lower()))
+            matched_keywords = [kw for kw in cls.DOMAIN_KEYWORDS.get(domain, []) if word_freq[kw] > 0]
+
             return {
                 "ats_score": min(100, round(score)),
                 "feedback": feedback,
+                "matched_keywords": matched_keywords,
                 "keyword_analysis": cls._get_keyword_analysis(resume_data, domain)
             }
-            
+
         except Exception as e:
             return {"error": f"ATS calculation failed: {str(e)}"}
+
 
     @classmethod
     def _analyze_keywords(cls, data: Dict, domain: str) -> Tuple[int, List[str]]:
