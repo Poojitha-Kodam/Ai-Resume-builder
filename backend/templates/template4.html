@@ -1,37 +1,122 @@
-<!-- TEMPLATE 4: Data Science - Entry Level -->
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
+    <meta charset="UTF-8" />
+    <title>{{ name }} – Data Scientist Resume</title>
     <style>
-        :root { --ds-color: #27ae60; }
-        body { font-family: 'Open Sans', sans-serif; }
-        .ds-header { background: linear-gradient(45deg, #2ecc71, #27ae60); color: white; padding: 40px; }
-        .toolkit { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
-        .modeling-section { background: #e8f6f3; padding: 20px; }
+      body {
+        font-family: "Verdana", sans-serif;
+        margin: 20px;
+        color: #333;
+      }
+      header {
+        border-bottom: 3px solid #218838;
+        padding-bottom: 10px;
+      }
+      header h1 {
+        margin: 0;
+        font-size: 2.2em;
+      }
+      .contact {
+        margin-top: 5px;
+        font-size: 0.9em;
+      }
+      .section {
+        margin-top: 30px;
+      }
+      .section h2 {
+        color: #218838;
+        border-bottom: 1px solid #ccc;
+        padding-bottom: 5px;
+      }
+      .entry {
+        margin-bottom: 20px;
+      }
+      .entry h3 {
+        margin: 0;
+        font-size: 1.2em;
+      }
+      .entry p {
+        margin: 5px 0;
+      }
+      .skills li {
+        display: inline-block;
+        background: #d4edda;
+        margin: 4px;
+        padding: 6px 10px;
+        border-radius: 4px;
+      }
+      .certifications {
+        margin-top: 10px;
+        font-style: italic;
+        color: #555;
+      }
     </style>
-</head>
-<body>
-    <div class="ds-header">
-        <h1>{{name}}</h1>
-        <h2>{{title}}</h2>
-        <div class="contact-info">
-            {{contactInfo.email}} | {{contactInfo.linkedin}} | {{contactInfo.github}}
-        </div>
+  </head>
+  <body>
+    <header>
+      <h1>{{ name }}</h1>
+      <div class="contact">
+        <span>{{ title }}</span> &middot;
+        <span>{{ contactInfo.email }}</span> &middot;
+        <span>{{ contactInfo.phone }}</span> &middot;
+        <span
+          ><a href="{{ contactInfo.linkedin }}" target="_blank"
+            >LinkedIn</a
+          ></span
+        >
+      </div>
+    </header>
+
+    <div class="section">
+      <h2>Professional Summary</h2>
+      <p>{{ summary }}</p>
     </div>
 
-    <div style="padding:30px">
-        <h2>DATA SCIENCE TOOLKIT</h2>
-        <div class="toolkit">
-            {% for skill in skills %}<div class="skill-tag">{{skill}}</div>{% endfor %}
-        </div>
+    <div class="section">
+      <h2>Work Experience</h2>
+      {% for exp in workExperience %}
+      <div class="entry">
+        <h3>{{ exp.title }} – {{ exp.company }}</h3>
+        <em>{{ exp.dates }}</em>
+        <p>{{ exp.description }}</p>
+      </div>
+      {% endfor %}
+    </div>
 
-        <h2>PROJECTS</h2>
-        {% for project in projects %}
-        <div class="modeling-section">
-            <h3>{{project.name}}</h3>
-            <p>{{project.description}}</p>
-        </div>
+    <div class="section">
+      <h2>Education</h2>
+      {% for edu in education %}
+      <div class="entry">
+        <h3>{{ edu.degree }}, {{ edu.school }}</h3>
+        <em>{{ edu.dates }}</em>
+        <p>{{ edu.description }}</p>
+      </div>
+      {% endfor %}
+    </div>
+
+    <div class="section">
+      <h2>Technical Skills & Certifications</h2>
+      <ul class="skills">
+        {% for skill in skills %}
+        <li>{{ skill }}</li>
         {% endfor %}
+      </ul>
+      {% if certifications %}
+      <p class="certifications">
+        <strong>Certifications:</strong> {{ certifications | join(", ") }}
+      </p>
+      {% endif %}
     </div>
-</body>
+
+    <div class="section">
+      <h2>Projects</h2>
+      {% for proj in projects %}
+      <div class="entry">
+        <h3>{{ proj.name }}</h3>
+        <p>{{ proj.description }}</p>
+      </div>
+      {% endfor %}
+    </div>
+  </body>
 </html>

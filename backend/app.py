@@ -1,3 +1,4 @@
+from ats_scoring import ATSScanner
 from flask import Flask, request, jsonify, send_file, render_template, url_for, send_from_directory
 import pdfkit
 import os
@@ -5,6 +6,8 @@ import glob
 import time
 from flask_cors import CORS
 import spacy
+# from ats_scoring import calculate_ats_score  # Import the ATS scoring function
+
 
 app = Flask(__name__,
     static_folder='static',
@@ -138,6 +141,14 @@ def generate_resume():
     except Exception as e:
         print(f"❌ Error generating resume: {e}")
         return jsonify({"message": "Failed to generate resume", "error": str(e)}), 500
+@app.route("/calculate-ats-score", methods=["POST"])
+def calculate_ats_score():
+    try:
+        data = request.json
+        result = ATSScanner.calculate_score(data)
+        return jsonify(result)
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 @app.route("/download-resume/<filename>", methods=["GET"])
 def download_resume(filename):

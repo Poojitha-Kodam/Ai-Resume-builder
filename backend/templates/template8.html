@@ -1,38 +1,134 @@
-<!-- TEMPLATE 8: Product Management - Mid Level -->
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <style>
-        body { font-family: 'Tahoma', sans-serif; }
-        .portfolio-link { color: #8e44ad; border-bottom: 2px solid; }
-        .metric-bubble { background: #f0e6f5; border-radius: 15px; padding: 15px; }
-        .gantt-example { background: #f8f9fa; padding: 20px; }
-    </style>
+  <meta charset="UTF-8" />
+  <title>{{ name }} - Resume</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: #f4f4f4;
+    }
+    .container {
+      width: 800px;
+      background: #fff;
+      padding: 20px;
+      margin: auto;
+      box-shadow: 0px 0px 10px #ccc;
+    }
+    .header { text-align: center; }
+    .header h1 { margin-bottom: 5px; }
+    .header h3 { margin-top: 0; color: #666; }
+    .contact { text-align: center; margin-bottom: 20px; }
+    .contact p { margin: 5px 0; }
+    .section { margin-bottom: 20px; }
+    .section h2 { border-bottom: 1px solid #ddd; padding-bottom: 5px; }
+    .skills ul { list-style: none; padding: 0; }
+    .skills ul li {
+      display: inline-block;
+      background: #007BFF;
+      color: #fff;
+      padding: 5px 10px;
+      margin: 5px;
+      border-radius: 5px;
+    }
+  </style>
 </head>
 <body>
-    <div style="max-width: 900px; margin: 0 auto; padding: 30px;">
-        <header style="text-align: center;">
-            <h1>{{name}}</h1>
-            <h2 style="color: #8e44ad">{{title}}</h2>
-            <div>{{contactInfo.linkedin}} | Portfolio: <span class="portfolio-link">example.com/portfolio</span></div>
-        </header>
-
-        <div style="margin:40px 0">
-            <h2>PRODUCT METRICS</h2>
-            <div class="metric-bubble">
-                {% for project in projects %}
-                <p><strong>{{project.name}}:</strong> {{project.description}}</p>
-                {% endfor %}
-            </div>
-        </div>
-
-        <h2>CAREER PROGRESSION</h2>
-        {% for exp in workExperience %}
-        <div class="gantt-example">
-            <h3>{{exp.title}} | {{exp.company}}</h3>
-            <p>{{exp.dates}} | {{exp.description}}</p>
-        </div>
-        {% endfor %}
+  <div class="container">
+    <!-- Header Section -->
+    <div class="header">
+      <h1>{{ name }}</h1>
+      <h3>{{ title }}</h3>
     </div>
+
+    <!-- Contact Information -->
+    <div class="contact">
+      <p>Email: {{ contactInfo.email }}</p>
+      <p>Phone: {{ contactInfo.phone }}</p>
+      <p>LinkedIn: <a href="{{ contactInfo.linkedin }}">{{ contactInfo.linkedin }}</a></p>
+      {% if contactInfo.website %}
+      <p>Website: <a href="{{ contactInfo.website }}">{{ contactInfo.website }}</a></p>
+      {% endif %}
+    </div>
+
+    <!-- Summary Section -->
+    <div class="section">
+      <h2>Summary</h2>
+      <p>{{ summary }}</p>
+    </div>
+
+    <!-- Work Experience Section -->
+    <div class="section">
+      <h2>Work Experience</h2>
+      {% for job in workExperience %}
+      <div>
+        <h3>{{ job.position }} at {{ job.company }}</h3>
+        <p><em>{{ job.startDate }} - {{ job.endDate }}</em></p>
+        <p>{{ job.description }}</p>
+      </div>
+      {% endfor %}
+    </div>
+
+    <!-- Education Section -->
+    <div class="section">
+      <h2>Education</h2>
+      {% for edu in education %}
+      <div>
+        <h3>{{ edu.degree }} from {{ edu.school }}</h3>
+        <p><em>{{ edu.startYear }} - {{ edu.endYear }}</em></p>
+        {% if edu.description %}
+        <p>{{ edu.description }}</p>
+        {% endif %}
+      </div>
+      {% endfor %}
+    </div>
+
+    <!-- Skills Section -->
+    <div class="section skills">
+      <h2>Skills</h2>
+      <ul>
+        {% for skill in skills %}
+        <li>{{ skill }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <!-- Certifications Section -->
+    <div class="section">
+      <h2>Certifications</h2>
+      {% for cert in certifications %}
+      <p>{{ cert.name }} - {{ cert.issuedBy }}</p>
+      {% endfor %}
+    </div>
+
+    <!-- Projects Section -->
+    <div class="section">
+      <h2>Projects</h2>
+      {% for project in projects %}
+      <div>
+        <h3>{{ project.title }}</h3>
+        <p>{{ project.description }}</p>
+      </div>
+      {% endfor %}
+    </div>
+
+    <!-- Languages Section -->
+    <div class="section">
+      <h2>Languages</h2>
+      <p>{{ languages | join(', ') }}</p>
+    </div>
+
+    <!-- Achievements Section -->
+    <div class="section">
+      <h2>Achievements</h2>
+      <ul>
+        {% for achievement in achievements %}
+        <li>{{ achievement }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
 </body>
 </html>

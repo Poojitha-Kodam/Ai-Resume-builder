@@ -1,50 +1,123 @@
-<!-- TEMPLATE 2: Software Engineering - Mid Level -->
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="UTF-8">
-    <title>{{name}} - Senior Software Engineer</title>
+  <head>
+    <meta charset="UTF-8" />
+    <title>{{ name }} – Software Engineer Resume</title>
     <style>
-        :root { --primary: #34495e; --accent: #e74c3c; }
-        body { font-family: 'Helvetica Neue', sans-serif; max-width: 800px; margin: 0 auto; }
-        .header { text-align: center; padding: 30px 0; }
-        .badge { background: var(--accent); color: white; padding: 8px 15px; border-radius: 20px; }
-        .two-column { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
-        .experience-item { margin-bottom: 25px; }
-        .certifications { display: flex; flex-wrap: wrap; gap: 10px; }
+      body {
+        font-family: "Helvetica Neue", sans-serif;
+        margin: 20px;
+        color: #333;
+      }
+      header {
+        border-bottom: 3px solid #0056b3;
+        padding-bottom: 10px;
+      }
+      header h1 {
+        margin: 0;
+        font-size: 2.2em;
+      }
+      .contact {
+        margin-top: 5px;
+        font-size: 0.9em;
+      }
+      .section {
+        margin-top: 30px;
+      }
+      .section h2 {
+        color: #0056b3;
+        border-bottom: 1px solid #ccc;
+        padding-bottom: 5px;
+      }
+      .entry {
+        margin-bottom: 20px;
+      }
+      .entry h3 {
+        margin: 0;
+        font-size: 1.2em;
+      }
+      .entry p {
+        margin: 5px 0;
+      }
+      .skills li {
+        display: inline-block;
+        background: #d0e0ff;
+        margin: 4px;
+        padding: 6px 10px;
+        border-radius: 4px;
+      }
+      .awards {
+        margin-top: 10px;
+        font-style: italic;
+        color: #555;
+      }
     </style>
-</head>
-<body>
-    <div class="header">
-        <h1>{{name}}</h1>
-        <div class="badge">{{experience}} Developer</div>
-        <div style="margin-top:15px">{{contactInfo.email}} | {{contactInfo.phone}} | {{contactInfo.github}}</div>
+  </head>
+  <body>
+    <header>
+      <h1>{{ name }}</h1>
+      <div class="contact">
+        <span>{{ title }}</span> &middot;
+        <span>{{ contactInfo.email }}</span> &middot;
+        <span>{{ contactInfo.phone }}</span> &middot;
+        <span
+          ><a href="{{ contactInfo.linkedin }}" target="_blank"
+            >LinkedIn</a
+          ></span
+        >
+      </div>
+    </header>
+
+    <div class="section">
+      <h2>Professional Summary</h2>
+      <p>{{ summary }}</p>
     </div>
 
-    <div class="two-column">
-        <div>
-            <h2>CORE COMPETENCIES</h2>
-            <ul>{% for skill in skills %}<li>{{skill}}</li>{% endfor %}</ul>
-            
-            <h2>EDUCATION</h2>
-            {% for edu in education %}
-            <div>
-                <h3>{{edu.degree}}</h3>
-                <p>{{edu.school}} | {{edu.dates}}</p>
-            </div>
-            {% endfor %}
-        </div>
-
-        <div>
-            <h2>PROFESSIONAL EXPERIENCE</h2>
-            {% for exp in workExperience %}
-            <div class="experience-item">
-                <h3>{{exp.title}}</h3>
-                <p><strong>{{exp.company}}</strong> | {{exp.dates}}</p>
-                <p>{{exp.description}}</p>
-            </div>
-            {% endfor %}
-        </div>
+    <div class="section">
+      <h2>Work Experience</h2>
+      {% for exp in workExperience %}
+      <div class="entry">
+        <h3>{{ exp.title }} – {{ exp.company }}</h3>
+        <em>{{ exp.dates }}</em>
+        <p>{{ exp.description }}</p>
+        {% if exp.awards %}
+        <div class="awards">Awards: {{ exp.awards }}</div>
+        {% endif %}
+      </div>
+      {% endfor %}
     </div>
-</body>
+
+    <div class="section">
+      <h2>Education</h2>
+      {% for edu in education %}
+      <div class="entry">
+        <h3>{{ edu.degree }}, {{ edu.school }}</h3>
+        <em>{{ edu.dates }}</em>
+        <p>{{ edu.description }}</p>
+      </div>
+      {% endfor %}
+    </div>
+
+    <div class="section">
+      <h2>Skills & Certifications</h2>
+      <ul class="skills">
+        {% for skill in skills %}
+        <li>{{ skill }}</li>
+        {% endfor %}
+      </ul>
+      {% if certifications %}
+      <p><strong>Certifications:</strong> {{ certifications | join(", ") }}</p>
+      {% endif %}
+    </div>
+
+    <div class="section">
+      <h2>Projects</h2>
+      {% for proj in projects %}
+      <div class="entry">
+        <h3>{{ proj.name }}</h3>
+        <p>{{ proj.description }}</p>
+      </div>
+      {% endfor %}
+    </div>
+  </body>
 </html>

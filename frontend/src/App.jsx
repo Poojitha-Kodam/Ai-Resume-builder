@@ -31,6 +31,7 @@ export default function ChatbotUI() {
     "Mid Level",
     "Senior Level",
   ]);
+  const [atsScore, setAtsScore] = useState(null);
 
   useEffect(() => {
     if (selectedDomain && selectedExperience) {
@@ -86,7 +87,6 @@ export default function ChatbotUI() {
   const addEducation = () => {
     setEducations([...educations, { id: educations.length + 1 }]);
   };
-
 const handleFormSubmit = async (e) => {
   e.preventDefault();
 
@@ -133,6 +133,7 @@ const handleFormSubmit = async (e) => {
   console.log("Form data being sent to backend:", formData); // Debug log
 
   try {
+    // First, generate the resume
     const response = await fetch("http://localhost:5000/generate-resume", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -151,6 +152,19 @@ const handleFormSubmit = async (e) => {
     } else {
       alert("❌ Failed to generate resume.");
     }
+
+    // Then, calculate the ATS score
+    const atsResponse = await fetch(
+      "http://localhost:5000/calculate-ats-score",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      }
+    );
+
+    const atsResult = await atsResponse.json();
+    setAtsScore(atsResult.ats_score);
   } catch (error) {
     alert("⚠️ Error submitting form: " + error);
     console.error(error);
@@ -170,6 +184,26 @@ const handleFormSubmit = async (e) => {
           <button onClick={openForm} className="form-button">
             Fill Necessary Details
           </button>
+        )}
+
+        {atsScore && (
+          <div className="ats-score-section">
+            <h3>ATS Score: {atsScore.ats_score}%</h3>
+            <div className="ats-feedback">
+              <h4>Improvement Tips:</h4>
+              <ul>
+                {atsScore.feedback?.map((tip, i) => (
+                  <li key={i}>{tip}</li>
+                ))}
+              </ul>
+              {atsScore.matched_keywords?.length > 0 && (
+                <p>
+                  <strong>Matched Keywords:</strong>{" "}
+                  {atsScore.matched_keywords.join(", ")}
+                </p>
+              )}
+            </div>
+          </div>
         )}
 
         {showForm && (
